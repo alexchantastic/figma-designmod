@@ -1,0 +1,32 @@
+<p>
+  <textarea
+    id="code"
+    rows="25"
+    style="width: 100%"
+    spellcheck="false"
+  ></textarea>
+</p>
+<button id="run">Run</button>
+<button id="cancel">Cancel</button>
+<script>
+  document.getElementById("run").onclick = () => {
+    const code = document.getElementById("code");
+    parent.postMessage(
+      { pluginMessage: { type: "run", code: code.value } },
+      "*",
+    );
+  };
+
+  document.getElementById("create").onclick = () => {
+    const textbox = document.getElementById("count");
+    const count = parseInt(textbox.value, 10);
+    parent.postMessage(
+      { pluginMessage: { type: "create-shapes", count } },
+      "*",
+    );
+  };
+
+  document.getElementById("cancel").onclick = () => {
+    parent.postMessage({ pluginMessage: { type: "cancel" } }, "*");
+  };
+</script>
