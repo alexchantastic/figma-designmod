@@ -5,7 +5,8 @@ figma.showUI(__html__, {
 
 figma.ui.onmessage = (msg: { type: string; code: string }) => {
   if (msg.type == "run") {
-    eval(msg.code);
+    const func = Function(msg.code);
+    func();
   }
 
   if (msg.type == "cancel") {
